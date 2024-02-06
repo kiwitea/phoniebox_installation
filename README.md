@@ -16,5 +16,10 @@ documenting building my phoniebox
   - https://raspberrypi.stackexchange.com/questions/45769/how-to-wait-for-networking-on-login-after-reboot
 
 ## Improvements
-- faster startup by disabling refreshing spotify playlists: https://github.com/MiczFlor/RPi-Jukebox-RFID/wiki/Troubleshooting-FAQ#spotify-wont-play-but-after-scan-of-library-it-works
+### faster startup
+- by disabling refreshing spotify playlists: https://github.com/MiczFlor/RPi-Jukebox-RFID/wiki/Troubleshooting-FAQ#spotify-wont-play-but-after-scan-of-library-it-works
   - set `allow_playlists = false` in `/etc/mopidy/mopidy.conf`
+- disabling bluetooth: https://raspberrypi.stackexchange.com/questions/53149/disable-power-on-wifi-and-bluetooth-interfaces-during-boot
+  - add `dtoverlay=disable-bt` to `/boot/config.txt`
+  - disable bluetooth service `sudo systemctl disable bluetooth`
+  - 
