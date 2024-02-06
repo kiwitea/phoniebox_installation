@@ -14,3 +14,7 @@ documenting building my phoniebox
   - as a workaround, we can configure the raspberry to wait for internet connection during boot (`raspi-config` --> enable wait for internet on boot)
   - https://github.com/MiczFlor/RPi-Jukebox-RFID/wiki/Troubleshooting-FAQ#spotify-wont-play-but-after-scan-of-library-it-works
   - https://raspberrypi.stackexchange.com/questions/45769/how-to-wait-for-networking-on-login-after-reboot
+
+## Improvements
+- faster startup by disabling refreshing spotify playlists: https://github.com/MiczFlor/RPi-Jukebox-RFID/wiki/Troubleshooting-FAQ#spotify-wont-play-but-after-scan-of-library-it-works
+  - set `allow_playlists = false` in `/etc/mopidy/mopidy.conf`
