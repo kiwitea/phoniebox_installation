@@ -19,6 +19,7 @@ documenting building my phoniebox
 - Restarting mopidy service: `sudo systemctl restart mopidy` (this work, after service restart, spotify connects)
   - setting `allow_playlists = false` in `/etc/mopidy/mopidy.conf` makes restarting mopidy service a lot faster (almost instant) because it doesn't sync all spotify playlists which takes 10-30s (obviously depending on the number of playlists in the account)
   - putting `sudo systemctl restart mopidy` into `/etc/rc.local` doesn't work (presumably because internet is not available yet when it runs)
+  - Idea (TODO): write a startup script that keep polling for internet connection and once established, restarts mopidy service, then exits. Must be running in background without blocking anything else.
 
 ## Improvements
 ### faster startup
