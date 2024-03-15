@@ -28,4 +28,22 @@ documenting building my phoniebox
 - disabling bluetooth: https://raspberrypi.stackexchange.com/questions/53149/disable-power-on-wifi-and-bluetooth-interfaces-during-boot
   - add `dtoverlay=disable-bt` to `/boot/config.txt`
   - disable bluetooth service `sudo systemctl disable bluetooth`
-  - 
+- static ip
+  - edit `/etc/dhcpcd.conf`, set X, Y, Z accordingly. Also configure router to assign static ip adres to RPi.
+    ```
+    interface wlan0
+    static ip_address=192.168.X.X/24
+    # static ip6_address=fd51:42f8:caae:d92e::ff/64
+    static routers=192.168.X.Y
+    static domain_name_servers=192.168.Z.Y 192.168.X.Y 8.8.8.8
+    noarp
+    ipv4only
+    noipv6
+    ```
+- disable IPv6
+  - ```bash
+    sudo sh -c "echo 'options ipv6 disable=1' >> /etc/modprobe.d/ipv6.conf"
+    sudo sh -c "echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf"
+    sudo sh -c "echo 'noipv6' >> /etc/dhcpcd.conf"
+    sudo sysctl -p
+    ```
