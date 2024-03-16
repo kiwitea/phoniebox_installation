@@ -21,6 +21,18 @@ documenting building my phoniebox
   - putting `sudo systemctl restart mopidy` into `/etc/rc.local` doesn't work (presumably because internet is not available yet when it runs)
   - Idea (TODO): write a startup script that keep polling for internet connection and once established, restarts mopidy service, then exits. Must be running in background without blocking anything else.
 
+### workaround for spotidy
+#### relax autohotstop
+autohotstop service was to agressive and impatient, when scanning for SSIDs, we mostly received 'device busy'. After 5 retries it started the hotspot which disabled the already running wifi connection. I increased the retry it waits until wifi device is available from 5 to 10.
+#### restart mopidy once internet is available
+1. checkout the 3 files in this repository and create a systemd service.
+2. service definition goes in `/etc/systemd/system/mopidy-retry-login.service`
+  ```bash
+  sudo chmod a+x /usr/bin/wait-for-internet.sh
+  sudo chmod a+x /usr/bin/mopidy-restart-to-login.sh
+  sudo systemctl enable mopidy-retry-login
+  ```
+
 ## Improvements
 ### faster startup
 - by disabling refreshing spotify playlists: https://github.com/MiczFlor/RPi-Jukebox-RFID/wiki/Troubleshooting-FAQ#spotify-wont-play-but-after-scan-of-library-it-works
