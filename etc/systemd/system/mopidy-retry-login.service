@@ -5,8 +5,9 @@ After=mopidy.service network-online.target
 [Service]
 ExecStartPre=/usr/bin/wait-for-internet.sh
 ExecStart=/usr/bin/mopidy-restart-to-login.sh
-Type=oneshot  # script is run once and then terminates, i.e. not a long running deamon
-RemainAfterExit=yes  # service stays in 'active' state after termination so that other services can react to it
+Type=oneshot
+RemainAfterExit=yes
+TimeoutSec=5min
 
 [Install]
 WantedBy=multi-user.target
