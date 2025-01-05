@@ -19,7 +19,18 @@ documenting building my phoniebox
 - Restarting mopidy service: `sudo systemctl restart mopidy` (this work, after service restart, spotify connects)
   - setting `allow_playlists = false` in `/etc/mopidy/mopidy.conf` makes restarting mopidy service a lot faster (almost instant) because it doesn't sync all spotify playlists which takes 10-30s (obviously depending on the number of playlists in the account)
   - putting `sudo systemctl restart mopidy` into `/etc/rc.local` doesn't work (presumably because internet is not available yet when it runs)
-  - Idea (TODO): write a startup script that keep polling for internet connection and once established, restarts mopidy service, then exits. Must be running in background without blocking anything else.
+  - As a workround: wrote a service script that keeps polling for internet connection and once established, restarts mopidy service, then exits. Must be running in background without blocking anything else. Also added a card that restarts mopidy service and plays a confirmation sound if login was succesful.
+    - `settings/rfid_trigger_play.conf`: add trigger variable with card id
+      ```
+      ### Restart mopidy service and thus retry spotify login
+      RESTARTMOPIDY="0003529101"
+      ``` 
+    - `scripts/rfid_trigger_play.sh`: add action called when card is scanned:
+    ```
+            $RESTARTMOPIDY)
+            sudo service mopidy-retry-login restart
+            ;;
+    ```
 
 ### workaround for spotidy
 #### relax autohotstop
